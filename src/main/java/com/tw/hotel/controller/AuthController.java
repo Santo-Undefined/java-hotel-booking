@@ -11,9 +11,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,17 +48,38 @@ public class AuthController {
                     .maxAge(Duration.ofMillis(EXPIRATION_TIME))
                     .build();
 
-            logger.info("user {} successfully logged in", userResponseDto.username());
+            logger.info("user {} successfully signed in", userResponseDto.username());
             return ResponseEntity.status(201)
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
                     .build();
-        } catch (Throwable e){
-            if (e instanceof UserNotFound || e instanceof InvalidCredentials){
+        } catch (InvalidCredentials e){
                 return ResponseEntity.badRequest().build();
-            }
-            throw e;
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody UserRequestDto userRequestDto){
+        try {
+            logger.info("login for user {}", userRequestDto.username());
+            UserResponseDto user = userService.login(userRequestDto);
+            String token = jwtService.generateToken(user.username());
+            ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                    .httpOnly(true)
+                    .secure(true)
+                    .sameSite("Strict")
+                    .path("/")
+                    .maxAge(Duration.ofMillis(EXPIRATION_TIME))
+                    .build();
+
+            return ResponseEntity.status(201)
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+
+        } catch (InvalidCredentials | UserNotFound e) {
+            System.out.println("Error -> " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+    }
 }
 

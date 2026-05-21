@@ -24,8 +24,9 @@ public class UserService {
     public  UserResponseDto login(UserRequestDto userRequestDto) throws UserNotFound, InvalidCredentials {
         Optional<User> existingUser = userRepository.findUserByUserName(userRequestDto.username());
         if (!existingUser.isPresent()) throw new UserNotFound("User not found");
-        User user = new User(existingUser.get().getUserName(), existingUser.get().getPassword());
-        if( user.getPassword() != userRequestDto.password()) throw  new InvalidCredentials("Password does not match");
+
+        User user = existingUser.get();
+        if( !user.getPassword().equals( userRequestDto.password())) throw  new InvalidCredentials("Password does not match");
 
         return user.toResponse(UserResponseDto::new);
     };
@@ -34,7 +35,7 @@ public class UserService {
         return userRepository.findUserByUserName(username).orElseThrow(() -> new NotFoundException(String.format("User {} not found", username)));
     }
 
-    public UserResponseDto signUp(@Valid UserRequestDto userRequestDto) throws  ExistingUser {
+    public UserResponseDto signUp(UserRequestDto userRequestDto) throws  ExistingUser {
         Optional<User> existingUser = userRepository.findUserByUserName(userRequestDto.username());
         if (existingUser.isPresent()) {
             throw new ExistingUser(String.format("user {} already exists", userRequestDto.username()));
