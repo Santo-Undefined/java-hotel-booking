@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -39,8 +37,8 @@ class BookingControllerTest {
                 .returnResult()
                 .getResponseBody();
 
-        assertEquals("1", responseBody.getBooking_id());
-        assertEquals(1, responseBody.getHotel_id());
+        assertEquals("1", responseBody.getBookingId());
+        assertEquals(1, responseBody.getHotelId());
         assertEquals(3, responseBody.getRooms());
     }
 }

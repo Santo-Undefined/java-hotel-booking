@@ -6,6 +6,7 @@ import com.tw.hotel.requestDto.BookingDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -29,4 +30,7 @@ public class BookingService {
         return bookingsList;
     }
 
+    public BookingDetails listBookingById(String bookingId) {
+        return bookingRepository.findByBookingId(bookingId);
+    }
 }

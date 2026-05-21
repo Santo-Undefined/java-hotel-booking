@@ -10,13 +10,13 @@ import java.util.Objects;
 @Document
 public final class BookingDetails {
     @Id
-    private final String booking_id;
-    private final int hotel_id;
+    private final String bookingId;
+    private final int hotelId;
     private final int rooms;
 
-    public BookingDetails(String booking_id, int hotel_id, int rooms) {
-        this.booking_id = booking_id;
-        this.hotel_id = hotel_id;
+    public BookingDetails(String bookingId, int hotelId, int rooms) {
+        this.bookingId = bookingId;
+        this.hotelId = hotelId;
         this.rooms = rooms;
     }
 
@@ -25,14 +25,14 @@ public final class BookingDetails {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (BookingDetails) obj;
-        return this.booking_id == that.booking_id &&
-                this.hotel_id == that.hotel_id &&
+        return this.bookingId == that.bookingId &&
+                this.hotelId == that.hotelId &&
                 this.rooms == that.rooms;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(booking_id, hotel_id, rooms);
+        return Objects.hash(bookingId, hotelId, rooms);
     }
 
 }

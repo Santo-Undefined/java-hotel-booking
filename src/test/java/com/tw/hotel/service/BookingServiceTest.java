@@ -28,7 +28,7 @@ class BookingServiceTest {
 
         BookingDetails bookingDetails = bookingService.bookHotel(request);
 
-        assertEquals(bookingDetails.getHotel_id(), 5);
+        assertEquals(bookingDetails.getHotelId(), 5);
         assertEquals(bookingDetails.getRooms(), 3);
     }
 
