@@ -19,7 +19,6 @@ public class BookingController {
 
     @PostMapping("/bookings")
     public BookingStatus bookHotel(@RequestBody BookingRequest bookingRequest) {
-        System.out.println("getting");
         return bookingService.bookHotel(bookingRequest);
     }
 }
