@@ -20,7 +20,6 @@ public final class BookingStatus {
         this.rooms = rooms;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

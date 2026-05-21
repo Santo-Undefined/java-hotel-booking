@@ -1,0 +1,9 @@
+spring:
+  mongodb:
+    uri: ${HOTEL_MONGO_URI:mongodb://localhost:27017/booking-test}
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 7.0.12
