@@ -3,9 +3,11 @@ package com.tw.hotel.service;
 import com.tw.hotel.controller.UserResponseDto;
 import com.tw.hotel.entities.User;
 import com.tw.hotel.exceptions.InvalidCredentials;
+import com.tw.hotel.exceptions.NotFoundException;
 import com.tw.hotel.exceptions.UserNotFound;
 import com.tw.hotel.repository.UserRepository;
 import com.tw.hotel.requestDto.UserRequestDto;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -26,5 +28,9 @@ public class UserService {
 
         return user.toResponse(UserResponseDto::new);
     };
+
+    public User findUser(String username) throws NotFoundException {
+        return userRepository.findUserByUserName(username).orElseThrow(() -> new NotFoundException(String.format("User {} not found", username)));
+    }
 
 }
