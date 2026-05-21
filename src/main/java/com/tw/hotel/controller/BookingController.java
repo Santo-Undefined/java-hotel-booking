@@ -1,7 +1,7 @@
 package com.tw.hotel.controller;
 
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingStatus;
+import com.tw.hotel.requestDto.BookingDetails;
 import com.tw.hotel.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class BookingController {
     }
 
     @PostMapping("/bookings")
-    public BookingStatus bookHotel(@RequestBody BookingRequest bookingRequest) {
+    public BookingDetails bookHotel(@RequestBody BookingRequest bookingRequest) {
         return bookingService.bookHotel(bookingRequest);
     }
 }

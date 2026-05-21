@@ -8,13 +8,13 @@ import java.util.Objects;
 
 @Data
 @Document
-public final class BookingStatus {
+public final class BookingDetails {
     @Id
     private final String booking_id;
     private final int hotel_id;
     private final int rooms;
 
-    public BookingStatus(String booking_id, int hotel_id, int rooms) {
+    public BookingDetails(String booking_id, int hotel_id, int rooms) {
         this.booking_id = booking_id;
         this.hotel_id = hotel_id;
         this.rooms = rooms;
@@ -24,7 +24,7 @@ public final class BookingStatus {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (BookingStatus) obj;
+        var that = (BookingDetails) obj;
         return this.booking_id == that.booking_id &&
                 this.hotel_id == that.hotel_id &&
                 this.rooms == that.rooms;

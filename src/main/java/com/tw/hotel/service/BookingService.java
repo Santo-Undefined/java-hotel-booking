@@ -2,7 +2,7 @@ package com.tw.hotel.service;
 
 import com.tw.hotel.repository.BookingRepository;
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingStatus;
+import com.tw.hotel.requestDto.BookingDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,10 +15,10 @@ public class BookingService {
         this.idGenerator = idGenerator;
     }
 
-    public BookingStatus bookHotel(BookingRequest request) {
+    public BookingDetails bookHotel(BookingRequest request) {
         final String booking_id = this.idGenerator.generate();
-        final BookingStatus bookingStatus = new BookingStatus(booking_id, request.hotel_id(), request.rooms());
-        bookingRepository.save(bookingStatus);
-        return bookingStatus;
+        final BookingDetails bookingDetails = new BookingDetails(booking_id, request.hotel_id(), request.rooms());
+        bookingRepository.save(bookingDetails);
+        return bookingDetails;
     }
 }

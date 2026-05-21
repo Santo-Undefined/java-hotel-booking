@@ -1,7 +1,7 @@
 package com.tw.hotel.controller;
 
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingStatus;
+import com.tw.hotel.requestDto.BookingDetails;
 import com.tw.hotel.service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +24,16 @@ class BookingControllerTest {
 
     @Test
     void shouldReturnABookingStatus() {
-        BookingStatus expectedStatus = new BookingStatus("1", 1, 3);
+        BookingDetails expectedStatus = new BookingDetails("1", 1, 3);
         BookingRequest request = new BookingRequest(1, 3);
         when(bookingService.bookHotel(request)).thenReturn(expectedStatus);
 
-        BookingStatus responseBody = client.post()
+        BookingDetails responseBody = client.post()
                 .uri("/api/bookings")
                 .body(request).
                 exchange()
                 .expectStatus().isOk()
-                .expectBody(BookingStatus.class)
+                .expectBody(BookingDetails.class)
                 .returnResult()
                 .getResponseBody();
 

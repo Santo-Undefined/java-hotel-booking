@@ -1,7 +1,7 @@
 package com.tw.hotel.service;
 
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingStatus;
+import com.tw.hotel.requestDto.BookingDetails;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.data.mongodb.test.autoconfigure.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,11 +23,11 @@ class BookingServiceTest {
         final IdGenerator mockGenerator = mock(IdGenerator.class);
         BookingRequest request = new BookingRequest(5, 3);
 
-        when(bookingService.bookHotel(request)).thenReturn(new BookingStatus("12312312", 5,3));
+        when(bookingService.bookHotel(request)).thenReturn(new BookingDetails("12312312", 5,3));
 
-        BookingStatus bookingStatus = bookingService.bookHotel(request);
+        BookingDetails bookingDetails = bookingService.bookHotel(request);
 
-        assertEquals(bookingStatus.getHotel_id(), 5);
-        assertEquals(bookingStatus.getRooms(), 3);
+        assertEquals(bookingDetails.getHotel_id(), 5);
+        assertEquals(bookingDetails.getRooms(), 3);
     }
 }
