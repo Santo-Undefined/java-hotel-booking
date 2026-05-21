@@ -1,7 +1,7 @@
 package com.tw.hotel.controller;
 
-import com.tw.hotel.requestDot.BookingRequest;
-import com.tw.hotel.requestDot.BookingStatus;
+import com.tw.hotel.requestDto.BookingRequest;
+import com.tw.hotel.requestDto.BookingStatus;
 import com.tw.hotel.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

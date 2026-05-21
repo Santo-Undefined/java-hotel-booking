@@ -1,7 +1,7 @@
 package com.tw.hotel.service;
 
-import com.tw.hotel.requestDot.BookingRequest;
-import com.tw.hotel.requestDot.BookingStatus;
+import com.tw.hotel.requestDto.BookingRequest;
+import com.tw.hotel.requestDto.BookingStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,6 +15,6 @@ class BookingServiceTest {
         BookingService bookingService = new BookingService();
         BookingRequest request = new BookingRequest(1, 3);
         BookingStatus bookingStatus = bookingService.bookHotel(request);
-        assertTrue(bookingStatus.equals(new BookingStatus(request.hotel_id(), request.rooms(), "Booking successful")));
+        assertTrue(bookingStatus.equals(new BookingStatus(1, request.hotel_id(), request.rooms(), "Booking successful")));
     }
 }

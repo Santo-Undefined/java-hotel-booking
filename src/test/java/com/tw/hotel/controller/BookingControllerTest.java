@@ -1,7 +1,7 @@
 package com.tw.hotel.controller;
 
-import com.tw.hotel.requestDot.BookingRequest;
-import com.tw.hotel.requestDot.BookingStatus;
+import com.tw.hotel.requestDto.BookingRequest;
+import com.tw.hotel.requestDto.BookingStatus;
 import com.tw.hotel.service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -24,7 +23,7 @@ class BookingControllerTest {
 
     @Test
     void shouldReturnABookingStatus() {
-        BookingStatus expectedStatus = new BookingStatus(1, 3, "Booking Successful");
+        BookingStatus expectedStatus = new BookingStatus(1, 1, 3, "Booking Successful");
         BookingRequest request = new BookingRequest(1, 3);
         when(bookingService.bookHotel(request)).thenReturn(expectedStatus);
 

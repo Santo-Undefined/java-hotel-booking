@@ -1,7 +1,7 @@
 package com.tw.hotel.service;
 
-import com.tw.hotel.requestDot.BookingRequest;
-import com.tw.hotel.requestDot.BookingStatus;
+import com.tw.hotel.requestDto.BookingRequest;
+import com.tw.hotel.requestDto.BookingStatus;
 import org.springframework.stereotype.Service;
 
 @Service
