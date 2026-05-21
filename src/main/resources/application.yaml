@@ -1,6 +1,8 @@
 spring:
   application:
     name: hotel
+  mongodb:
+    uri: ${HOTEL_MONGO_URI}
 
 server:
   port: 3000
