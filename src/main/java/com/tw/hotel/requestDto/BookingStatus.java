@@ -10,11 +10,11 @@ import java.util.Objects;
 @Document
 public final class BookingStatus {
     @Id
-    private final int booking_id;
+    private final String booking_id;
     private final int hotel_id;
     private final int rooms;
 
-    public BookingStatus(int booking_id, int hotel_id, int rooms) {
+    public BookingStatus(String booking_id, int hotel_id, int rooms) {
         this.booking_id = booking_id;
         this.hotel_id = hotel_id;
         this.rooms = rooms;

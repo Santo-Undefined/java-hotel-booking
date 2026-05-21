@@ -24,7 +24,7 @@ class BookingControllerTest {
 
     @Test
     void shouldReturnABookingStatus() {
-        BookingStatus expectedStatus = new BookingStatus(1, 1, 3);
+        BookingStatus expectedStatus = new BookingStatus("1", 1, 3);
         BookingRequest request = new BookingRequest(1, 3);
         when(bookingService.bookHotel(request)).thenReturn(expectedStatus);
 
@@ -37,6 +37,8 @@ class BookingControllerTest {
                 .returnResult()
                 .getResponseBody();
 
-        assertEquals(expectedStatus, responseBody);
+        assertEquals("1", responseBody.getBooking_id());
+        assertEquals(1, responseBody.getHotel_id());
+        assertEquals(3, responseBody.getRooms());
     }
 }

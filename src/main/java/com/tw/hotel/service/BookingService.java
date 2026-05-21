@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookingService {
     private final BookingRepository bookingRepository;
+    private final IdGenerator idGenerator;
 
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingService(BookingRepository bookingRepository, IdGenerator idGenerator) {
         this.bookingRepository = bookingRepository;
+        this.idGenerator = idGenerator;
     }
 
     public BookingStatus bookHotel(BookingRequest request) {
-        final BookingStatus bookingStatus = new BookingStatus(1, request.hotel_id(), request.rooms());
+        final String booking_id = this.idGenerator.generate();
+        final BookingStatus bookingStatus = new BookingStatus(booking_id, request.hotel_id(), request.rooms());
         bookingRepository.save(bookingStatus);
         return bookingStatus;
     }

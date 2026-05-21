@@ -5,21 +5,21 @@ import com.tw.hotel.requestDto.BookingRequest;
 import com.tw.hotel.requestDto.BookingStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 @SpringBootTest
 class BookingServiceTest {
 
-    @MockitoBean
-    private BookingRepository bookingRepository;
-
     @Test
-    void shouldBookAHotel() throws InstantiationException, IllegalAccessException {
-        BookingService bookingService = new BookingService(bookingRepository.getClass().newInstance());
+    void shouldBookAHotel() {
+        final IdGenerator mockGenerator = mock(IdGenerator.class);
+        final BookingRepository mockRepo = mock(BookingRepository.class);
+        BookingService bookingService = new BookingService(mockRepo, mockGenerator);
         BookingRequest request = new BookingRequest(5, 3);
         BookingStatus bookingStatus = bookingService.bookHotel(request);
-        assertTrue(bookingStatus.equals(new BookingStatus(1, request.hotel_id(), request.rooms())));
+        assertEquals(bookingStatus.getHotel_id(), 5);
+        assertEquals(bookingStatus.getRooms(), 3);
     }
 }
