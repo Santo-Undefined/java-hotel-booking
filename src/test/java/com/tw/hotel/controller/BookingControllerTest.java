@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -23,7 +24,7 @@ class BookingControllerTest {
 
     @Test
     void shouldReturnABookingStatus() {
-        BookingStatus expectedStatus = new BookingStatus(1, 1, 3, "Booking Successful");
+        BookingStatus expectedStatus = new BookingStatus(1, 1, 3);
         BookingRequest request = new BookingRequest(1, 3);
         when(bookingService.bookHotel(request)).thenReturn(expectedStatus);
 
@@ -36,6 +37,6 @@ class BookingControllerTest {
                 .returnResult()
                 .getResponseBody();
 
-//        assertEquals(expectedStatus, responseBody);
+        assertEquals(expectedStatus, responseBody);
     }
 }
