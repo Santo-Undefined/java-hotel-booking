@@ -22,7 +22,6 @@ public class HotelController {
     @GetMapping("/hotels")
     public ResponseEntity<HotelsSearchResult> searchHotel(@RequestParam String city) {
         HotelsSearchResult results = hotelService.searchHotels(city);
-        System.out.println(results);
         return ResponseEntity.ok().body(results);
     }
 }
