@@ -1,24 +1,19 @@
 package com.tw.hotel.service;
 
+import com.tw.hotel.repository.HotelRepository;
 import com.tw.hotel.requestDto.HotelsSearchResult;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+@Service
 public class HotelService {
 
-    private final ArrayList<HotelRecord> hotelRecords;
+    private final HotelRepository hotelRepository;
 
-    public HotelService(ArrayList<HotelRecord> hotelRecords) {
-        this.hotelRecords = hotelRecords;
+    public HotelService(HotelRepository hotelRepository) {
+        this.hotelRepository = hotelRepository;
     }
 
     public HotelsSearchResult searchHotels(String city) {
-        ArrayList<HotelRecord> hotelsSearchResults = hotelRecords
-                .stream()
-                .filter(hotels -> hotels.city().equals(city))
-                .collect(Collectors.toCollection(ArrayList::new));
-        return new HotelsSearchResult(hotelsSearchResults);
+        return new HotelsSearchResult(hotelRepository.findHotelsByCity(city));
     }
 }

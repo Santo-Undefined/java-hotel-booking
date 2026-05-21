@@ -1,8 +1,8 @@
 package com.tw.hotel.requestDto;
 
-import com.tw.hotel.service.HotelRecord;
+import com.tw.hotel.service.Hotel;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public record HotelsSearchResult(ArrayList<HotelRecord> hotels) {
+public record HotelsSearchResult(List<Hotel> hotels) {
 }
