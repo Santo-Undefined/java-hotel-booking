@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookingServiceTest {
 
     @Test
-    void shouldReturnTrue() {
+    void shouldBookAHotel() {
         BookingService bookingService = new BookingService();
         BookingRequest request = new BookingRequest(1, 3);
         BookingStatus bookingStatus = bookingService.bookHotel(request);
