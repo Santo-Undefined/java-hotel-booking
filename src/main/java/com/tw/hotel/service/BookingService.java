@@ -5,6 +5,8 @@ import com.tw.hotel.requestDto.BookingRequest;
 import com.tw.hotel.requestDto.BookingDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookingService {
     private final BookingRepository bookingRepository;
@@ -21,4 +23,10 @@ public class BookingService {
         bookingRepository.save(bookingDetails);
         return bookingDetails;
     }
+
+    public List<BookingDetails> listBookings() {
+        final List<BookingDetails> bookingsList = bookingRepository.findAll();
+        return bookingsList;
+    }
+
 }

@@ -7,6 +7,8 @@ import org.springframework.boot.data.mongodb.test.autoconfigure.AutoConfigureDat
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,7 +22,6 @@ class BookingServiceTest {
 
     @Test
     void shouldBookAHotel() {
-        final IdGenerator mockGenerator = mock(IdGenerator.class);
         BookingRequest request = new BookingRequest(5, 3);
 
         when(bookingService.bookHotel(request)).thenReturn(new BookingDetails("12312312", 5,3));
@@ -29,5 +30,14 @@ class BookingServiceTest {
 
         assertEquals(bookingDetails.getHotel_id(), 5);
         assertEquals(bookingDetails.getRooms(), 3);
+    }
+
+    @Test
+    void shouldReturnListOfBookings() {
+        when(bookingService.listBookings()).thenReturn(List.of(new BookingDetails("12312312", 5,3)));
+
+        List<BookingDetails> bookingDetails = bookingService.listBookings();
+
+        assertEquals(bookingDetails.get(0), new BookingDetails("12312312", 5,3));
     }
 }
