@@ -15,6 +15,6 @@ class BookingServiceTest {
         BookingService bookingService = new BookingService();
         BookingRequest request = new BookingRequest(1, 3);
         BookingStatus bookingStatus = bookingService.bookHotel(request);
-        assertTrue(bookingStatus.equals(new BookingStatus(request.hotelId(), request.roomCount(), "Booking successful")));
+        assertTrue(bookingStatus.equals(new BookingStatus(request.hotel_id(), request.rooms(), "Booking successful")));
     }
 }
