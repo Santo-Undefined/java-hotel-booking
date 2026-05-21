@@ -7,5 +7,4 @@ public record BookingRequest(int hotelId, int roomCount) {
         if (!(o instanceof BookingRequest request)) return false;
         return hotelId == request.hotelId && roomCount == request.roomCount;
     }
-
 }
