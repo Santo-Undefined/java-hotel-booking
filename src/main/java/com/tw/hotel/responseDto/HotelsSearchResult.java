@@ -1,6 +1,6 @@
-package com.tw.hotel.requestDto;
+package com.tw.hotel.responseDto;
 
-import com.tw.hotel.service.Hotel;
+import com.tw.hotel.entities.Hotel;
 
 import java.util.List;
 

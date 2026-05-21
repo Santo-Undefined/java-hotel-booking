@@ -1,7 +1,7 @@
 package com.tw.hotel.controller;
 
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingDetails;
+import com.tw.hotel.entities.BookingDetails;
 import com.tw.hotel.service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

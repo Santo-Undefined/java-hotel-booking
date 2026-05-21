@@ -1,6 +1,6 @@
 package com.tw.hotel.controller;
 
-import com.tw.hotel.requestDto.HotelsSearchResult;
+import com.tw.hotel.responseDto.HotelsSearchResult;
 import com.tw.hotel.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -5,13 +5,18 @@ import com.tw.hotel.exceptions.ExistingUser;
 import com.tw.hotel.exceptions.InvalidCredentials;
 import com.tw.hotel.exceptions.UserNotFound;
 import com.tw.hotel.requestDto.UserRequestDto;
+import com.tw.hotel.responseDto.UserResponseDto;
 import com.tw.hotel.service.JwtService;
 import com.tw.hotel.service.UserService;
 import jakarta.validation.Valid;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +45,7 @@ public class AuthController {
             logger.info("signup user with {}", user);
             UserResponseDto userResponseDto = userService.signUp(user);
             String token = jwtService.generateToken(userResponseDto.username());
-            ResponseCookie cookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)
-                    .secure(true)
-                    .sameSite("Strict")
-                    .path("/")
-                    .maxAge(Duration.ofMillis(EXPIRATION_TIME))
-                    .build();
+            ResponseCookie cookie = createResponseCookieForJWT(token);
 
             logger.info("user {} successfully signed in", userResponseDto.username());
             return ResponseEntity.status(201)
@@ -63,23 +62,29 @@ public class AuthController {
             logger.info("login for user {}", userRequestDto.username());
             UserResponseDto user = userService.login(userRequestDto);
             String token = jwtService.generateToken(user.username());
-            ResponseCookie cookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)
-                    .secure(true)
-                    .sameSite("Strict")
-                    .path("/")
-                    .maxAge(Duration.ofMillis(EXPIRATION_TIME))
-                    .build();
+            ResponseCookie cookie = createResponseCookieForJWT(token);
 
             return ResponseEntity.status(201)
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
                     .build();
 
-        } catch (InvalidCredentials | UserNotFound e) {
+        } catch (InvalidCredentials e) {
             System.out.println("Error -> " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (UserNotFound e){
+            System.out.println("Error -> " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
 
+    private @NonNull ResponseCookie createResponseCookieForJWT(String token) {
+        return ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("Strict")
+                .path("/")
+                .maxAge(Duration.ofMillis(EXPIRATION_TIME))
+                .build();
     }
 }
 

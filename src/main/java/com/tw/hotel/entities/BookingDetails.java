@@ -1,4 +1,4 @@
-package com.tw.hotel.requestDto;
+package com.tw.hotel.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -25,7 +25,7 @@ public final class BookingDetails {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (BookingDetails) obj;
-        return this.bookingId == that.bookingId &&
+        return Objects.equals(this.bookingId, that.bookingId) &&
                 this.hotelId == that.hotelId &&
                 this.rooms == that.rooms;
     }

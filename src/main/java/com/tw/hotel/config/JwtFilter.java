@@ -1,6 +1,5 @@
-package com.tw.hotel.filter;
+package com.tw.hotel.config;
 
-import com.tw.hotel.config.CustomUserDetailService;
 import com.tw.hotel.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

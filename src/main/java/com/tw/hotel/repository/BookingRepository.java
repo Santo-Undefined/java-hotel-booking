@@ -1,6 +1,6 @@
 package com.tw.hotel.repository;
 
-import com.tw.hotel.requestDto.BookingDetails;
+import com.tw.hotel.entities.BookingDetails;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

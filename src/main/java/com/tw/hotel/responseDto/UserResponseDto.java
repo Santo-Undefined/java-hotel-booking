@@ -1,4 +1,4 @@
-package com.tw.hotel.controller;
+package com.tw.hotel.responseDto;
 
 public record UserResponseDto(String username) {
 }

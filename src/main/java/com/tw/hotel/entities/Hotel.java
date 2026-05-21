@@ -1,4 +1,4 @@
-package com.tw.hotel.service;
+package com.tw.hotel.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

@@ -1,4 +1,4 @@
-package com.tw.hotel.filter;
+package com.tw.hotel.config;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

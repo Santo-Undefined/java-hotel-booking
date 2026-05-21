@@ -1,7 +1,7 @@
 package com.tw.hotel.service;
 
 import com.tw.hotel.requestDto.BookingRequest;
-import com.tw.hotel.requestDto.BookingDetails;
+import com.tw.hotel.entities.BookingDetails;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.data.mongodb.test.autoconfigure.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,8 +1,9 @@
 package com.tw.hotel.controller;
 
-import com.tw.hotel.requestDto.BookingDetails;
+import com.tw.hotel.entities.BookingDetails;
 import com.tw.hotel.requestDto.BookingRequest;
 import com.tw.hotel.service.BookingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class BookingController {
     }
 
     @PostMapping("/bookings")
-    public BookingDetails bookHotel(@RequestBody BookingRequest bookingRequest) {
+    public BookingDetails bookHotel(@Valid @RequestBody BookingRequest bookingRequest) {
         return bookingService.bookHotel(bookingRequest);
     }
 
