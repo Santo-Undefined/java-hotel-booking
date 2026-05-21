@@ -6,7 +6,6 @@ import com.tw.hotel.requestDto.BookingDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -19,15 +18,14 @@ public class BookingService {
     }
 
     public BookingDetails bookHotel(BookingRequest request) {
-        final String booking_id = this.idGenerator.generate();
-        final BookingDetails bookingDetails = new BookingDetails(booking_id, request.hotel_id(), request.rooms());
+        final String bookingId = this.idGenerator.generate();
+        final BookingDetails bookingDetails = new BookingDetails(bookingId, request.hotelId(), request.rooms());
         bookingRepository.save(bookingDetails);
         return bookingDetails;
     }
 
     public List<BookingDetails> listBookings() {
-        final List<BookingDetails> bookingsList = bookingRepository.findAll();
-        return bookingsList;
+        return bookingRepository.findAll();
     }
 
     public BookingDetails listBookingById(String bookingId) {
