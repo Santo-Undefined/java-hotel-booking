@@ -1,13 +1,13 @@
 package com.tw.hotel.controller;
 
 
+import com.tw.hotel.exceptions.ExistingUser;
 import com.tw.hotel.exceptions.InvalidCredentials;
 import com.tw.hotel.exceptions.UserNotFound;
 import com.tw.hotel.requestDto.UserRequestDto;
 import com.tw.hotel.service.JwtService;
 import com.tw.hotel.service.UserService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,11 +37,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> login(@RequestBody UserRequestDto user) throws UserNotFound, InvalidCredentials {
+    public ResponseEntity<?> signup(@Valid @RequestBody UserRequestDto user) throws ExistingUser {
         try {
-            logger.info("Logging in user with request {}", user);
-            UserResponseDto userResponseDto = userService.login(user);
-            String token = jwtService.generateToken(userResponseDto.userName());
+            logger.info("signup user with {}", user);
+            UserResponseDto userResponseDto = userService.signUp(user);
+            String token = jwtService.generateToken(userResponseDto.username());
             ResponseCookie cookie = ResponseCookie.from("jwt", token)
                     .httpOnly(true)
                     .secure(true)
@@ -50,7 +50,7 @@ public class AuthController {
                     .maxAge(Duration.ofMillis(EXPIRATION_TIME))
                     .build();
 
-            logger.info("user {} successfully logged in", userResponseDto.userName());
+            logger.info("user {} successfully logged in", userResponseDto.username());
             return ResponseEntity.status(201)
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
                     .build();
@@ -62,15 +62,5 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<String> post(HttpServletResponse response) {
-        Cookie cookie = new Cookie("jwt", null);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        return ResponseEntity.ok("Cookie Deleted Successfully");
-    }
 }
 

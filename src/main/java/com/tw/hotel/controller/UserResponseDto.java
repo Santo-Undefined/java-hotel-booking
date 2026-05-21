@@ -1,4 +1,4 @@
 package com.tw.hotel.controller;
 
-public record UserResponseDto(String userName) {
+public record UserResponseDto(String username) {
 }

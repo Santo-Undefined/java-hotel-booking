@@ -9,7 +9,6 @@ public class HotelApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(HotelApplication.class, args);
-//			System.out.println(System.getenv("HOTEL_MONGO_URI"));
 	}
 
 }
