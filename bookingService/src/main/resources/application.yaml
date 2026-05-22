@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: hotel
+  mongodb:
+    uri: ${HOTEL_MONGO_URI:mongodb://localhost:27017/hoteldb}
+
+security:
+  jwt:
+    secret-key: ${JWT_SECURITY_KEY}
+    expiration-time: ${JWT_EXP_TIME}
+
+server:
+  port: 3000
+
+kind: Application
