@@ -1,9 +1,15 @@
 spring:
   mongodb:
     uri: ${HOTEL_MONGO_URI:mongodb://localhost:27017/booking-test}
+  swagger-ui:
+    enabled: false
 
-de:
-  flapdoodle:
-    mongodb:
-      embedded:
-        version: 7.0.12
+security:
+  jwt:
+    secret-key: xxxxxxxx
+    expiration-time: 12345
+
+server:
+  port: 3000
+
+kind: Application

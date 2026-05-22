@@ -10,8 +10,6 @@ import com.tw.hotel.responseDto.UserResponseDto;
 
 public interface UserService {
     UserResponseDto login(UserRequestDto userRequestDto) throws UserNotFound, InvalidCredentials;
-
     User findUser(String username) throws NotFoundException;
-
     UserResponseDto signUp(UserRequestDto userRequestDto) throws ExistingUser;
 }
