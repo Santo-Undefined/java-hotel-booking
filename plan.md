@@ -1,11 +1,5 @@
-(single client)
+## MicroServices implementation
 
-db -> mongodb
-auth -> jwt
-
-endpoint
-    /search (priyanshu)
-        -> mock hotel data
-    
-    /book-hotel
-        -> mock booking data
+    - Two services 
+        - Search
+        - Booking

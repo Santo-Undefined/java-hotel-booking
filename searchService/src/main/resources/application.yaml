@@ -6,7 +6,7 @@ spring:
 
 security:
   jwt:
-    secret-key: ${JWT_SECURITY_KEY}
-    expiration-time: ${JWT_EXP_TIME}
+
+
 
 kind: Application

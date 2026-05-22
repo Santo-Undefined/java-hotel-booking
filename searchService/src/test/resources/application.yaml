@@ -6,8 +6,8 @@ spring:
 
 security:
   jwt:
-    secret-key: xxxxxxxx
-    expiration-time: 12345
+
+
 
 server:
   port: 3000
