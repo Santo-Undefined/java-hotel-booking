@@ -9,7 +9,4 @@ security:
     secret-key: ${JWT_SECURITY_KEY}
     expiration-time: ${JWT_EXP_TIME}
 
-server:
-  port: 3000
-
 kind: Application
