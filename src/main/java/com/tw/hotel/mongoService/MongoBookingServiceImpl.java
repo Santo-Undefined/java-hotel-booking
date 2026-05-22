@@ -22,7 +22,7 @@ public class MongoBookingServiceImpl implements BookingService {
     @Override
     public BookingDetails bookHotel(BookingRequest request) {
         final String bookingId = this.idGenerator.generate();
-        final BookingDetails bookingDetails = new BookingDetails(bookingId, request.hotelId(), request.rooms());
+        final BookingDetails bookingDetails = new BookingDetails(bookingId, request.hotel_id(), request.rooms());
         bookingRepository.save(bookingDetails);
         return bookingDetails;
     }
