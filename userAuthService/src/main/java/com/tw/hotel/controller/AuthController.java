@@ -1,6 +1,5 @@
 package com.tw.hotel.controller;
 
-
 import com.tw.hotel.exceptions.ExistingUser;
 import com.tw.hotel.exceptions.InvalidCredentials;
 import com.tw.hotel.exceptions.UserNotFound;
