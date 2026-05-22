@@ -11,13 +11,19 @@ import java.util.Objects;
 public final class BookingDetails {
     @Id
     private final String bookingId;
+    private final String userName;
     private final int hotelId;
     private final int rooms;
 
-    public BookingDetails(String bookingId, int hotelId, int rooms) {
+    public BookingDetails(String bookingId, String userName,int hotelId, int rooms) {
         this.bookingId = bookingId;
+        this.userName = userName;
         this.hotelId = hotelId;
         this.rooms = rooms;
+    }
+
+    public <T> T toResponse(BookingProjector<T> projector) {
+        return projector.project(bookingId,hotelId,rooms);
     }
 
     @Override

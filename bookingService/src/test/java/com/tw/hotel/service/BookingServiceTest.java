@@ -24,7 +24,7 @@ class BookingServiceTest {
     void shouldBookAHotel() {
         BookingRequest request = new BookingRequest(5, 3);
 
-        when(bookingService.bookHotel(request)).thenReturn(new BookingDetails("12312312", 5,3));
+        when(bookingService.bookHotel(request)).thenReturn(new BookingDetails("12312312", "test",5,3));
 
         BookingDetails bookingDetails = bookingService.bookHotel(request);
 
@@ -34,10 +34,10 @@ class BookingServiceTest {
 
     @Test
     void shouldReturnListOfBookings() {
-        when(bookingService.listBookings()).thenReturn(List.of(new BookingDetails("12312312", 5,3)));
+        when(bookingService.listBookings()).thenReturn(List.of(new BookingDetails("12312312", "test",5,3)));
 
         List<BookingDetails> bookingDetails = bookingService.listBookings();
 
-        assertEquals(bookingDetails.get(0), new BookingDetails("12312312", 5,3));
+        assertEquals(bookingDetails.get(0), new BookingDetails("12312312", "test",5,3));
     }
 }

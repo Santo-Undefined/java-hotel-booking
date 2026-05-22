@@ -2,6 +2,7 @@ package com.tw.hotel.controller;
 
 import com.tw.hotel.entities.BookingDetails;
 import com.tw.hotel.requestDto.BookingRequest;
+import com.tw.hotel.responseDto.BookingResponseDto;
 import com.tw.hotel.service.BookingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,18 @@ public class BookingController {
     }
 
     @PostMapping("/bookings")
-    public BookingDetails bookHotel(@Valid @RequestBody BookingRequest bookingRequest) {
-        System.out.println("in booking");
+    public BookingResponseDto bookHotel(@Valid @RequestBody BookingRequest bookingRequest) {
         return bookingService.bookHotel(bookingRequest);
     }
 
     @GetMapping("/bookings")
-    public List<BookingDetails> listBookings(){
-        System.out.println("in booking controller");
+    public List<BookingResponseDto> listBookings(){
         return bookingService.listBookings();
     }
 
     @GetMapping("/bookings/{bookingId}/receipt.pdf")
     public ResponseEntity<String> bookingReceipt(@PathVariable String bookingId) {
-        System.out.println("in receipt, booking id " + bookingId);
-        BookingDetails bookingDetails = bookingService.listBookingById(bookingId);
+        BookingResponseDto bookingDetails = bookingService.listBookingById(bookingId);
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
         httpHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf");

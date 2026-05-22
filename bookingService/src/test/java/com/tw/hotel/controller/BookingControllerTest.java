@@ -24,7 +24,7 @@ class BookingControllerTest {
 
     @Test
     void shouldReturnABookingStatus() {
-        BookingDetails expectedStatus = new BookingDetails("1", 1, 3);
+        BookingDetails expectedStatus = new BookingDetails("1", "test",1, 3);
         BookingRequest request = new BookingRequest(1, 3);
         when(bookingService.bookHotel(request)).thenReturn(expectedStatus);
 
