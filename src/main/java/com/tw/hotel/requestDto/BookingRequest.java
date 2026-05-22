@@ -1,4 +1,4 @@
 package com.tw.hotel.requestDto;
 
-public record BookingRequest(int hotelId, int rooms) {
+public record BookingRequest(int hotel_id, int rooms) {
 }
