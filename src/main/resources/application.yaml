@@ -3,8 +3,6 @@ spring:
     name: hotel
   mongodb:
     uri: ${HOTEL_MONGO_URI:mongodb://localhost:27017/hoteldb}
-  swagger-ui:
-    enabled: false
 
 security:
   jwt:

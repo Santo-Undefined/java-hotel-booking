@@ -2,16 +2,6 @@ package com.tw.hotel.service;
 
 import com.tw.hotel.responseDto.HotelsSearchResult;
 
-@Service
-public class HotelService {
-
-    private final HotelRepository hotelRepository;
-
-    public HotelService(HotelRepository hotelRepository) {
-        this.hotelRepository = hotelRepository;
-    }
-
-    public HotelsSearchResult searchHotels(String city) {
-        return new HotelsSearchResult(hotelRepository.findHotelsByCity(city));
-    }
+public interface HotelService {
+     HotelsSearchResult searchHotels(String city);
 }

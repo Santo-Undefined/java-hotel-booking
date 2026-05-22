@@ -31,6 +31,7 @@ public class BookingController {
 
     @GetMapping("/bookings")
     public List<BookingDetails> listBookings(){
+        System.out.println("in booking controller");
         return bookingService.listBookings();
     }
 
