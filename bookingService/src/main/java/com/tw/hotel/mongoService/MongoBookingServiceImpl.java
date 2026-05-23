@@ -36,7 +36,6 @@ public class MongoBookingServiceImpl implements BookingService {
 
         BookingResponseDto response = bookingDetails.toResponse(BookingResponseDto::new);
         redisService.pushTask(response).subscribe();
-//        System.out.println(longMono);
         return response;
     }
 
