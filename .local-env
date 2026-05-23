@@ -2,3 +2,5 @@ export JWT_SECURITY_KEY=9a4f5c8d3b7a1e6f5q8d9a0b2c3d4e5f6a7b5c9d0e1fva3b4c5d6e7f
 export JWT_EXP_TIME=3600000
 
 export HOTEL_MONGO_URI=mongodb://localhost:27017/hoteldb
+export REDIS_HOST=redis://redis:6379
+export REDIS_TASK_QUEUE=task-queue

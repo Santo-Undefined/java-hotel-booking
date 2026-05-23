@@ -11,6 +11,5 @@ public interface BookingService {
     BookingResponseDto bookHotel(BookingRequest request) throws JsonProcessingException;
     List<BookingResponseDto> listBookings();
     BookingResponseDto listBookingById(String bookingId);
-
     BookingResponseDto updateStatus(String bookingId);
 }

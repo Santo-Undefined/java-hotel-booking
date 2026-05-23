@@ -8,15 +8,18 @@ import com.tw.hotel.responseDto.BookingResponseDto;
 import com.tw.hotel.service.BookingService;
 import com.tw.hotel.service.IdGenerator;
 import com.tw.hotel.service.RedisService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @Service
 public class MongoBookingServiceImpl implements BookingService {
+    private final Logger logger = LoggerFactory.getLogger("Request Logger");
+
     private final RedisService redisService;
     private final BookingRepository bookingRepository;
     private final IdGenerator idGenerator;
@@ -29,13 +32,17 @@ public class MongoBookingServiceImpl implements BookingService {
 
     @Override
     public BookingResponseDto bookHotel(BookingRequest request) throws JsonProcessingException {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String bookingId = this.idGenerator.generate();
         final BookingDetails bookingDetails = new BookingDetails(bookingId,auth.getName(), request.hotel_id(), request.rooms(), "Receipt is generating");
         bookingRepository.save(bookingDetails);
 
         BookingResponseDto response = bookingDetails.toResponse(BookingResponseDto::new);
-        redisService.pushTask(response).subscribe();
+        redisService.pushTask(response).subscribe(
+                length -> logger.info("Successfully pushed to Redis. New queue length: {}", length),
+                error -> logger.error("Failed to push task to Redis: {}", error.getMessage()),
+                () -> logger.debug("Redis operation completed."));
         return response;
     }
 
