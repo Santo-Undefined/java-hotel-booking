@@ -10,6 +10,4 @@ spring:
 security:
   jwt:
 
-
-
 kind: Application
