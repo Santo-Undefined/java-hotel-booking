@@ -14,16 +14,18 @@ public final class BookingDetails {
     private final String userName;
     private final int hotelId;
     private final int rooms;
+    private String status;
 
-    public BookingDetails(String bookingId, String userName,int hotelId, int rooms) {
+    public BookingDetails(String bookingId, String userName, int hotelId, int rooms, String status) {
         this.bookingId = bookingId;
         this.userName = userName;
         this.hotelId = hotelId;
         this.rooms = rooms;
+        this.status = status;
     }
 
     public <T> T toResponse(BookingProjector<T> projector) {
-        return projector.project(bookingId,hotelId,rooms);
+        return projector.project(bookingId, hotelId, rooms, status);
     }
 
     @Override

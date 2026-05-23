@@ -1,4 +1,4 @@
 package com.tw.hotel.responseDto;
 
-public record BookingResponseDto(String bookingId, int hotelId, int rooms) {
+public record BookingResponseDto(String bookingId, int hotelId, int rooms, String status) {
 }

@@ -2,6 +2,8 @@ package com.tw.hotel.repository;
 
 import com.tw.hotel.entities.BookingDetails;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,4 +12,7 @@ import java.util.List;
 public interface BookingRepository extends MongoRepository<BookingDetails, String> {
     List<BookingDetails> findBookingDetailsByUserName(String userName);
     BookingDetails findByBookingId(String bookingId);
+    @Query("{ 'bookingId' : ?0 }")
+    @Update("{ '$set' : { 'status' : ?1 } }")
+    void findAndUpdateStatus(String bookingId, String newStatus);
 }

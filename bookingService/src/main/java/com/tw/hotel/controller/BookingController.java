@@ -1,9 +1,10 @@
 package com.tw.hotel.controller;
 
-import com.tw.hotel.entities.BookingDetails;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tw.hotel.requestDto.BookingRequest;
 import com.tw.hotel.responseDto.BookingResponseDto;
 import com.tw.hotel.service.BookingService;
+import com.tw.hotel.service.RedisService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,7 @@ public class BookingController {
     }
 
     @PostMapping("/bookings")
-    public BookingResponseDto bookHotel(@Valid @RequestBody BookingRequest bookingRequest) {
+    public BookingResponseDto bookHotel(@Valid @RequestBody BookingRequest bookingRequest) throws JsonProcessingException {
         return bookingService.bookHotel(bookingRequest);
     }
 
@@ -42,5 +43,10 @@ public class BookingController {
         httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
         httpHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf");
         return new ResponseEntity<>(bookingDetails.toString(), httpHeaders, HttpStatus.OK);
+    }
+
+    @PutMapping("/update-bookings/{bookingId}")
+    public BookingResponseDto updateBookingStatus(@PathVariable String bookingId) {
+        return bookingService.updateStatus(bookingId);
     }
 }
