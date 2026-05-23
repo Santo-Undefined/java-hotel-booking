@@ -3,6 +3,9 @@ spring:
     name: hotel
   mongodb:
     uri: ${HOTEL_MONGO_URI:mongodb://localhost:27017/hoteldb}
+  data:
+    redis:
+      url: "redis://redis:6379"
 
 security:
   jwt:
