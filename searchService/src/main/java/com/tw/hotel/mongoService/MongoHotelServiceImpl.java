@@ -18,11 +18,12 @@ public class MongoHotelServiceImpl implements HotelService {
     @Override
     @Cacheable(value = "hotelSearch", key = "#city")
     public HotelsSearchResult searchHotels(String city) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        System.out.println("cache miss");
         return new HotelsSearchResult(hotelRepository.findHotelsByCity(city));
     }
 }

@@ -12,10 +12,7 @@ import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +41,13 @@ public class AuthController {
             logger.info("signup user with {}", user);
             UserResponseDto userResponseDto = userService.signUp(user);
             String token = jwtService.generateToken(userResponseDto.username());
-            ResponseCookie cookie = createResponseCookieForJWT(token);
+//            ResponseCookie cookie = createResponseCookieForJWT(token);
 
             logger.info("user {} successfully signed in", userResponseDto.username());
-            return ResponseEntity.status(201)
-                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .build();
+            return new ResponseEntity<>(token, HttpStatus.OK);
+//            return ResponseEntity.status(201)
+//                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+//                    .build();
         } catch (InvalidCredentials e){
                 return ResponseEntity.badRequest().build();
         }
@@ -63,9 +61,10 @@ public class AuthController {
             String token = jwtService.generateToken(user.username());
             ResponseCookie cookie = createResponseCookieForJWT(token);
 
-            return ResponseEntity.status(201)
-                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .build();
+            return new ResponseEntity<>(token, HttpStatus.OK);
+//            return ResponseEntity.status(201)
+//                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+//                    .build();
 
         } catch (InvalidCredentials e) {
             System.out.println("Error -> " + e.getMessage());
